@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "676124512941",
+    "firebase_url": "https://loja-401f1.firebaseio.com",
+    "project_id": "loja-401f1",
+    "storage_bucket": "loja-401f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:676124512941:android:285bb84d5c1ffdea",
+        "android_client_info": {
+          "package_name": "br.edu.ifsul.loja"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "676124512941-gi04vdj4fcr5irkc2lklh6nclpf4j6dc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.edu.ifsul.loja",
+            "certificate_hash": "03669db2ac1e1821dd45d81c780852d5a4c9e8e8"
+          }
+        },
+        {
+          "client_id": "676124512941-3utnrei09v70jjgl3376demmcuvfqnqm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhHlGyJugkRO2jzfzKnSQbGy-jlLWvzhs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "676124512941-3utnrei09v70jjgl3376demmcuvfqnqm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
