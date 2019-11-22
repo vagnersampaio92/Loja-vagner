@@ -72,6 +72,7 @@ public class ClientesActivity extends AppCompatActivity {
 //                AppSetup.listProdutos = new ArrayList<>();
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
                     Cliente cliente = ds.getValue(Cliente.class);
+                    cliente.setKey(ds.getKey());
                     cliente.setIndex(clientes.size());
                     clientes.add(cliente);
                 }

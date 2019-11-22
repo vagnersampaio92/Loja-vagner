@@ -62,6 +62,11 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="nome_salesman_adapter">nome</string>
+    <string name="tvCpfSalesmanAdapter">CPF:</string>
+    <string name="tvCodSalesmanAdapter">Código:</string>
+    <string name="tvNomeSalesmanAdapter">Nome:</string>
+
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>

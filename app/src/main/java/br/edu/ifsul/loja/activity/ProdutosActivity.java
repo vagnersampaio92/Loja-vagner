@@ -99,6 +99,7 @@ public class ProdutosActivity extends AppCompatActivity implements NavigationVie
                     Log.d(TAG, "dataSnapshot=" + ds);
                     Produto produto = ds.getValue(Produto.class);
                     produto.setKey(ds.getKey());
+                    produto.setKey(ds.getKey());
                     produto.setIndex(AppSetup.listProdutos.size());
                     AppSetup.listProdutos.add(produto);
                 }

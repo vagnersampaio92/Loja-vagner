@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import br.edu.ifsul.loja.activity.UserActivity;
+import br.edu.ifsul.loja.model.User;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -75,6 +77,8 @@ public class ClientesAdapter extends ArrayAdapter<Cliente> {
         final TextView tvDetalhes;
         final ImageView imvFoto;
         final ProgressBar pbFotoCliente;
+
+
 
         public ViewHolder(View view) {
             //mapeia os componentes da UI para vincular os dados do objeto de modelo
