@@ -58,7 +58,7 @@ public class ClientesActivity extends AppCompatActivity {
 
         //obtém a instância do database e a referência para o nó
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("vendas/clientes");
+        DatabaseReference myRef = database.getReference("vendas/cliente");
 
         //Lê os dados na referência
         myRef.orderByChild("nome").addValueEventListener(new ValueEventListener() {

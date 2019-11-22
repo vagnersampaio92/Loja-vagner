@@ -49,15 +49,21 @@ public class SignupActivity extends AppCompatActivity {
         findViewById(R.id.buttonsignup).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = etEmail.getText().toString();
-                String senha = etSenha.getText().toString();
-                if(!email.isEmpty() && !senha.isEmpty()){
-                    signUp(email, senha);
+                User user = new User();
+                user.setEmail(etEmail.getText().toString());
+                user.setSenha(etSenha.getText().toString());
+                user.setNome(etNome.getText().toString());
+                user.setSobrenome(etSobrenome.getText().toString());
+                user.setFuncao(etFuncao.getText().toString());
+                user.setCodigoDeBarras(Long.parseLong(etCodigo.getText().toString()));
+                if(!user.getEmail().isEmpty() && !user.getSenha().isEmpty()){
+
+                    signUp(user);
                 }else{
-                    if(email.isEmpty()){
+                    if(user.getEmail().isEmpty()){
                         etEmail.setError(getString(R.string.msg_invalido));
                     }
-                    if(senha.isEmpty()){
+                    if(user.getSenha().isEmpty()){
                         etSenha.setError(getString(R.string.msg_invalido));
                     }
                   //  Snackbar.make(findViewById(R.id.R_id_container_activity_login), getString(R.string.toast_preencher_todos_campos), Snackbar.LENGTH_LONG).show();
@@ -66,15 +72,19 @@ public class SignupActivity extends AppCompatActivity {
         });
 
     }
-    private void signUp(String email, String senha) {
-//
-        mAuth.createUserWithEmailAndPassword(email, senha)
+    private void signUp(final User user) {
+
+        mAuth.createUserWithEmailAndPassword(user.getEmail(),user.getSenha())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
+                            user.setFirebaseUser( task.getResult().getUser().getIdToken());
+
+                            saveUI(user); //por que aqui não pode?
                             //FirebaseUser user = mAuth.getCurrentUser();
                             // updateUI(user);
                         } else {
@@ -88,29 +98,15 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 });
     }
-    private void updateUI() {
-//        FirebaseDatabase.getInstance().getReference()
-//                .child("vendas").child("users").child(mAuth.getCurrentUser().getUid())
-//                .addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                        //Log.d(TAG, "dataSnapshot=" + dataSnapshot + " id user = " + mAuth.getCurrentUser().getUid());
-//                        AppSetup.user = dataSnapshot.getValue(User.class);
-//                        AppSetup.user.setFirebaseUser(mAuth.getCurrentUser());
-//                        startActivity(new Intent(SignupActivity.this, ProdutosActivity.class));
-//                        finish();
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError databaseError) {
-//                        //    Snackbar.make(findViewById(R.id.R_id_container_activity_login), getString(R.string.snack_problem_autenticacao), Snackbar.LENGTH_LONG).show();
-//                    }
-//                });
-        //DatabaseReference ref;
-        //DatabaseReference postsRef = ref.child("vendas").child("users");
+    private void saveUI(User user) {
 
-        // DatabaseReference newPostRef = postsRef.push();
-        //  newPostRef.setValueAsync(new );
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+
+
+        DatabaseReference myRef = database.getReference().child("vendas").child("users").child(user.getFirebaseUser());
+
+        myRef.setValue(user);
 
     }
 

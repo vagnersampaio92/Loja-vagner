@@ -12,9 +12,18 @@ public class User implements Serializable {
     private String sobrenome;
     private String funcao;
     private String email;
+    private String senha;
     private FirebaseUser firebaseUser;
 
     public User() {
+    }
+    @Exclude
+    public String getSenha() {
+        return senha;
+    }
+    @Exclude
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public Long getCodigoDeBarras() {
@@ -52,6 +61,7 @@ public class User implements Serializable {
     public String getEmail() {
         return email;
     }
+
 
     public void setEmail(String email) {
         this.email = email;
