@@ -6,8 +6,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -37,6 +40,7 @@ public class SignupActivity extends AppCompatActivity {
 
         //ativa o botão home na actionbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -75,6 +79,23 @@ public class SignupActivity extends AppCompatActivity {
         });
 
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true; //chamada do método termina aqui
+    }
+
+
     private void signUp(final User user) {
 
         mAuth.createUserWithEmailAndPassword(user.getEmail(),user.getSenha())

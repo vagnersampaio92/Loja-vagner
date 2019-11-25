@@ -243,6 +243,11 @@ public class ProdutosActivity extends AppCompatActivity implements NavigationVie
                     Toast.makeText(this, "Clicou no add user", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(ProdutosActivity.this, SignupActivity.class));
                     break;
+                case R.id.nav_clientes:
+
+                    Toast.makeText(this, "Clicou no add user", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(ProdutosActivity.this, ClientesActivity.class));
+                    break;
             }
 
             return true;

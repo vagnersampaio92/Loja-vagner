@@ -105,9 +105,25 @@ public class ClientesActivity extends AppCompatActivity {
                 intent.putExtra(BarcodeCaptureActivity.UseFlash, false); //true liga a lanterna (fash)
                 startActivityForResult(intent, RC_BARCODE_CAPTURE);
                 break;
+
         }
 
         return true;
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_activity_clientes, menu);
+        
+
+
+        return true; //chamada do método termina aqui
+    }
+
+
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
 //    public boolean onCreateOptionsMenu(Menu menu) {
