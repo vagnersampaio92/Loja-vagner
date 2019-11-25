@@ -63,6 +63,8 @@ public class ProdutosActivity extends AppCompatActivity implements NavigationVie
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+
         //personaliza o menu da navigationview de acordo com o perfil do usuário logado na sessão
         if(AppSetup.user.getFuncao().equals("admin")){
             navigationView.getMenu().findItem(R.id.nav_group_admin).setVisible(true);
@@ -225,12 +227,27 @@ public class ProdutosActivity extends AppCompatActivity implements NavigationVie
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-        switch (menuItem.getItemId()){
-            case R.id.nav_home:
-                Toast.makeText(this, "Clicou no navhome", Toast.LENGTH_SHORT).show();
-                break;
-        }
 
-        return true;
+            Log.d(TAG, "entrou no onNavigationItemSelected");
+
+            switch (menuItem.getItemId()){
+                case R.id.nav_carrinho:
+                    Log.d(TAG, "entrou no case nav carrinho");
+
+                    Toast.makeText(this, "Clicou no navhome", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(ProdutosActivity.this, CarrinhoActivity.class));
+                    break;
+
+                case R.id.nav_add_user:
+
+                    Toast.makeText(this, "Clicou no add user", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(ProdutosActivity.this, SignupActivity.class));
+                    break;
+            }
+
+            return true;
     }
+
+
+
 }

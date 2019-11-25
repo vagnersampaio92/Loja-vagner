@@ -35,6 +35,9 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+        //ativa o botão home na actionbar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
@@ -82,8 +85,8 @@ public class SignupActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            user.setFirebaseUser( task.getResult().getUser().getIdToken());
-
+                            user.setFirebaseUser( task.getResult().getUser());
+                            Log.d(TAG, "uid: " + user.getFirebaseUser());
                             saveUI(user); //por que aqui não pode?
                             //FirebaseUser user = mAuth.getCurrentUser();
                             // updateUI(user);
@@ -98,15 +101,26 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 });
     }
-    private void saveUI(User user) {
+    private void saveUI(final User user) {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
+//        Log.d(TAG, "uid: " + user.getFirebaseUser());
 
 
-        DatabaseReference myRef = database.getReference().child("vendas").child("users").child(user.getFirebaseUser());
+        DatabaseReference myRef = database.getReference().child("vendas").child("users").child(user.getFirebaseUser().getUid());
 
         myRef.setValue(user);
+
+
+        user.getFirebaseUser().sendEmailVerification()
+               .addOnCompleteListener(new OnCompleteListener<Void>() {
+                   @Override
+                   public void onComplete(@NonNull Task<Void> task) {
+
+                   }
+               });
+        startActivity(new Intent(SignupActivity.this, ProdutosActivity.class));
 
     }
 

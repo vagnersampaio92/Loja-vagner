@@ -25,6 +25,7 @@ import java.text.NumberFormat;
 import br.edu.ifsul.loja.R;
 import br.edu.ifsul.loja.model.Cliente;
 import br.edu.ifsul.loja.model.ItemPedido;
+import br.edu.ifsul.loja.model.Pedido;
 import br.edu.ifsul.loja.model.Produto;
 import br.edu.ifsul.loja.setup.AppSetup;
 
@@ -86,7 +87,11 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
                             //baixa do estoque
                             myRef.setValue(produto.getQuantidade() - Integer.parseInt(etQuantidade.getText().toString()));
                             //vai para o carrinho
-                            startActivity(new Intent(ProdutoDetalheActivity.this, CarrinhoActivity.class));
+                            Intent intent = new Intent(ProdutoDetalheActivity.this, CarrinhoActivity.class);
+                            intent.putExtra("value",item.getTotalItem().toString());
+                            intent.putExtra("name_cli",AppSetup.cliente.getNome());
+                            intent.putExtra("nomeproduto",produto.getNome());
+                            startActivity(intent);
                             finish();
                         }
                     }else{

@@ -8,10 +8,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
@@ -27,6 +29,7 @@ import java.util.List;
 
 import br.edu.ifsul.loja.R;
 import br.edu.ifsul.loja.adapter.ClientesAdapter;
+import br.edu.ifsul.loja.adapter.ProdutosAdapter;
 import br.edu.ifsul.loja.barcode.BarcodeCaptureActivity;
 import br.edu.ifsul.loja.model.Cliente;
 import br.edu.ifsul.loja.model.Produto;
@@ -106,6 +109,38 @@ public class ClientesActivity extends AppCompatActivity {
 
         return true;
     }
+
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_activity_clientes, menu);
+//
+//        SearchView searchView = (SearchView) menu.findItem(R.id.menuitem_pesquisar).getActionView();
+//        searchView.setQueryHint(getString(R.string.text_nome));
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return true;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                clientesTemp.clear();
+//                for(Cliente p : clientes){
+//                    if(p.getNome().contains(newText)){
+//                        clientesTemp.add(p);
+//                    }
+//                }
+//
+//                //faz o bindView
+//                lvClientes.setAdapter(new ProdutosAdapter(ClientesActivity.this, clientesTemp));
+//
+//                return true;
+//            }
+//        });
+//        return true;
+//    }
+
+
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RC_BARCODE_CAPTURE) {
             if (resultCode == CommonStatusCodes.SUCCESS) {

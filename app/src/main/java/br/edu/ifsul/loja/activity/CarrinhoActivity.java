@@ -1,5 +1,6 @@
 package br.edu.ifsul.loja.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,7 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -18,12 +21,17 @@ import java.text.NumberFormat;
 import br.edu.ifsul.loja.R;
 import br.edu.ifsul.loja.model.ItemPedido;
 import br.edu.ifsul.loja.model.Pedido;
+import br.edu.ifsul.loja.model.Produto;
 import br.edu.ifsul.loja.setup.AppSetup;
 
 public class CarrinhoActivity extends AppCompatActivity {
 
     private static final String TAG = "carrinhoActivity";
     private ListView lvCarrinho;
+    private TextView valor;
+    private TextView nome;
+
+    private ArrayAdapter<Produto> adapter;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("vendas/");
 
@@ -33,9 +41,20 @@ public class CarrinhoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_carrinho);
         Log.d(TAG, "Carrinho=" + AppSetup.carrinho);
 
+        Intent intent = getIntent();
+        String val = intent.getStringExtra("value");
+        String name_cli = intent.getStringExtra("name_cli");
+
         //ativa o botão home na actionbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        valor = (TextView) findViewById(R.id.tvTotalPedidoCarrinho);
+        nome = (TextView) findViewById(R.id.tvClienteCarrinho);
+
+
+
+        valor.setText(val);
+        nome.setText(name_cli);
         //tratamento de eventos
         lvCarrinho = findViewById(R.id.lv_carrinho);
 
@@ -106,9 +125,17 @@ public class CarrinhoActivity extends AppCompatActivity {
     //limpar setup
     private void salvapedido (){
         Pedido p = new Pedido(AppSetup.carrinho);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        Log.d(TAG, "uid: " + user.getFirebaseUser());
+//        p.setKey("1");
+//        DatabaseReference myRef = database.getReference().child("vendas").child("pedidos").child(p.getKey());
+        DatabaseReference myRef = database.getReference("vendas/pedidos");
+        p.setKey(myRef.push().getKey()); //cria o nó e devolve a key
+
         p.setCliente(AppSetup.cliente);
-        //p.setSituacao("aberto);
-        myRef.setValue(p);
+        p.setSituacao(true);
+        
+        myRef.child(p.getKey()).setValue(p); //salva o produto no database
     }
     private void atualizaEstoque(int position){
         final  DatabaseReference myRef =database.getReference("vendas/produtos");
