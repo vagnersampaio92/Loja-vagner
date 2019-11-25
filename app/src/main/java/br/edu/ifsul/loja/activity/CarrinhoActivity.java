@@ -134,7 +134,7 @@ public class CarrinhoActivity extends AppCompatActivity {
 
         p.setCliente(AppSetup.cliente);
         p.setSituacao(true);
-        
+
         myRef.child(p.getKey()).setValue(p); //salva o produto no database
     }
     private void atualizaEstoque(int position){
