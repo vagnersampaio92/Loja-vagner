@@ -113,7 +113,29 @@ public class ClientesActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activity_clientes, menu);
-        
+        SearchView searchView = (SearchView) menu.findItem(R.id.menuitem_pesquisar).getActionView();
+        searchView.setQueryHint(getString(R.string.text_nome));
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                clientesTemp.clear();
+                for(Cliente p : clientes){
+                    if(p.getNome().contains(newText)){
+                        clientesTemp.add(p);
+                    }
+                }
+
+                //faz o bindView
+                lvClientes.setAdapter(new ClientesAdapter(ClientesActivity.this, clientesTemp));
+
+                return true;
+            }
+        });
 
 
         return true; //chamada do método termina aqui
@@ -126,34 +148,6 @@ public class ClientesActivity extends AppCompatActivity {
         finish();
     }
 
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_activity_clientes, menu);
-//
-//        SearchView searchView = (SearchView) menu.findItem(R.id.menuitem_pesquisar).getActionView();
-//        searchView.setQueryHint(getString(R.string.text_nome));
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                clientesTemp.clear();
-//                for(Cliente p : clientes){
-//                    if(p.getNome().contains(newText)){
-//                        clientesTemp.add(p);
-//                    }
-//                }
-//
-//                //faz o bindView
-//                lvClientes.setAdapter(new ProdutosAdapter(ClientesActivity.this, clientesTemp));
-//
-//                return true;
-//            }
-//        });
-//        return true;
-//    }
 
 
 
