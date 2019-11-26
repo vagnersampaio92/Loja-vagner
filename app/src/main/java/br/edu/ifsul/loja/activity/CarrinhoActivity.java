@@ -37,6 +37,7 @@ public class CarrinhoActivity extends AppCompatActivity {
     private ListView lvCarrinho;
     private TextView valor;
     private TextView nome;
+    private Double valortotal;
 
     private ArrayAdapter<Produto> adapter;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -49,7 +50,7 @@ public class CarrinhoActivity extends AppCompatActivity {
         Log.d(TAG, "Carrinho=" + AppSetup.carrinho);
 
         Intent intent = getIntent();
-        String val = intent.getStringExtra("value");
+
         String name_cli = intent.getStringExtra("name_cli");
 
         //ativa o botão home na actionbar
@@ -59,14 +60,11 @@ public class CarrinhoActivity extends AppCompatActivity {
         nome = (TextView) findViewById(R.id.tvClienteCarrinho);
 
 
-        valor.setText(val);
-        nome.setText(name_cli);
+//        valor.setText(NumberFormat.getCurrencyInstance().format(AppSetup.total));
+
+        nome.setText(AppSetup.user.getNome());
         //tratamento de eventos
         lvCarrinho = findViewById(R.id.lv_carrinho);
-
-        lvCarrinho.setAdapter(new CarrinhoAdapter(CarrinhoActivity.this, AppSetup.carrinho));
-
-
 
 
         lvCarrinho.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -86,6 +84,12 @@ public class CarrinhoActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        atualizarview();
     }
 
     @Override
@@ -171,9 +175,10 @@ public class CarrinhoActivity extends AppCompatActivity {
 
     private void atualizarview(){
 
-        Double valortotal;
+
         lvCarrinho.setAdapter(new CarrinhoAdapter(CarrinhoActivity.this, AppSetup.carrinho));
         valortotal= 0d;
+
         for(ItemPedido item : AppSetup.carrinho){
            valortotal += item.getTotalItem();
         }

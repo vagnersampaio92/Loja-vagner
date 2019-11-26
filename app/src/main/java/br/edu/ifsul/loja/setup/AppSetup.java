@@ -19,6 +19,7 @@ public class AppSetup {
     public static Cliente cliente = null;
     public static List<ItemPedido> carrinho = new ArrayList<>();
     public static User user = null;
+//    public static Double total = 0d;
     public static Cliente clienteAdm = null;
     public static Map<String, Bitmap> cacheProdutos =  new HashMap<>();
     public static Map<String, Bitmap> cacheClientes =  new HashMap<>();
