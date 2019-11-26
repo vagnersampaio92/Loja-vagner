@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.NumberFormat;
 
 import br.edu.ifsul.loja.R;
+import br.edu.ifsul.loja.adapter.CarrinhoAdapter;
 import br.edu.ifsul.loja.model.ItemPedido;
 import br.edu.ifsul.loja.model.Pedido;
 import br.edu.ifsul.loja.model.Produto;
@@ -51,7 +52,7 @@ public class CarrinhoActivity extends AppCompatActivity {
         valor = (TextView) findViewById(R.id.tvTotalPedidoCarrinho);
         nome = (TextView) findViewById(R.id.tvClienteCarrinho);
 
-
+   
         valor.setText(val);
         nome.setText(name_cli);
         //tratamento de eventos
@@ -168,7 +169,7 @@ public class CarrinhoActivity extends AppCompatActivity {
     private void atualizarview(){
 
         Double valortotal;
-       // lvCarrinho.setAdapter(new Carrinh(CarrinhoActivity.this, AppSetup.carrinho));
+        lvCarrinho.setAdapter(new CarrinhoAdapter(CarrinhoActivity.this, AppSetup.carrinho));
         valortotal= 0d;
         for(ItemPedido item : AppSetup.carrinho){
            valortotal += item.getTotalItem();
