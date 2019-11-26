@@ -10,12 +10,14 @@
         import android.widget.ArrayAdapter;
         import android.widget.TextView;
 
+        import java.text.NumberFormat;
         import java.util.List;
 
         import br.edu.ifsul.loja.R;
         import br.edu.ifsul.loja.model.ItemPedido;
         import br.edu.ifsul.loja.model.Pedido;
         import br.edu.ifsul.loja.model.User;
+        import br.edu.ifsul.loja.setup.AppSetup;
 
         public class CarrinhoAdapter extends ArrayAdapter<ItemPedido> {
 
@@ -41,6 +43,10 @@
                     holder = (CarrinhoAdapter.ViewHolder) convertView.getTag();
                 }
 //                Pedido pedido = getItem(position);
+
+                holder.Nome.setText(AppSetup.carrinho.get(position).getProduto().getNome());
+                holder.quantidade.setText(AppSetup.carrinho.get(position).getProduto().getQuantidade().toString());
+                holder.Total.setText(NumberFormat.getCurrencyInstance().format(AppSetup.carrinho.get(position).getTotalItem()));
 
 
 

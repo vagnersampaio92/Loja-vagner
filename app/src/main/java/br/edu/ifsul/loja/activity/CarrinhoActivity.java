@@ -1,6 +1,7 @@
 package br.edu.ifsul.loja.activity;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,16 +14,21 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.ifsul.loja.R;
 import br.edu.ifsul.loja.adapter.CarrinhoAdapter;
+import br.edu.ifsul.loja.adapter.UserAdapter;
 import br.edu.ifsul.loja.model.ItemPedido;
 import br.edu.ifsul.loja.model.Pedido;
 import br.edu.ifsul.loja.model.Produto;
+import br.edu.ifsul.loja.model.User;
 import br.edu.ifsul.loja.setup.AppSetup;
 
 public class CarrinhoActivity extends AppCompatActivity {
@@ -52,11 +58,16 @@ public class CarrinhoActivity extends AppCompatActivity {
         valor = (TextView) findViewById(R.id.tvTotalPedidoCarrinho);
         nome = (TextView) findViewById(R.id.tvClienteCarrinho);
 
-   
+
         valor.setText(val);
         nome.setText(name_cli);
         //tratamento de eventos
         lvCarrinho = findViewById(R.id.lv_carrinho);
+
+        lvCarrinho.setAdapter(new CarrinhoAdapter(CarrinhoActivity.this, AppSetup.carrinho));
+
+
+
 
         lvCarrinho.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -114,14 +125,6 @@ public class CarrinhoActivity extends AppCompatActivity {
 
 
     //editar um item
-
-
-
-
-
-
-
-
     //limpar setup
     private  void cancelacompra(){
         Integer cont;
