@@ -52,7 +52,6 @@ public class CarrinhoActivity extends AppCompatActivity {
         nome = (TextView) findViewById(R.id.tvClienteCarrinho);
 
 
-
         valor.setText(val);
         nome.setText(name_cli);
         //tratamento de eventos
@@ -63,7 +62,7 @@ public class CarrinhoActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(CarrinhoActivity.this, "Clique curto.", Toast.LENGTH_SHORT).show();
                 //pegar os itens e passar para venda, logo após passar o valor desse objeto para tvTotalPedidoCarrinho
-                venda();
+//                venda();
             }
         });
 
@@ -71,6 +70,7 @@ public class CarrinhoActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(CarrinhoActivity.this, "Clique longo.", Toast.LENGTH_SHORT).show();
+                cancelaItem(position);
                 return true;
             }
         });
@@ -100,6 +100,7 @@ public class CarrinhoActivity extends AppCompatActivity {
                 break;
             case R.id.menuitem_cancelar_pedido:
                 Toast.makeText(this, "Cancelar", Toast.LENGTH_SHORT).show();
+                cancelacompra();
                 break;
             case android.R.id.home:
                 finish();
@@ -109,20 +110,36 @@ public class CarrinhoActivity extends AppCompatActivity {
     }
 
 
-    //excluir um item
+
 
     //editar um item
 
-    //cancelar pedido
-
-    //salvar pedido
 
 
 
 
-    //rollback no estoque
+
+
 
     //limpar setup
+    private  void cancelacompra(){
+        Integer cont;
+
+        cont=AppSetup.carrinho.size();
+
+        for(Integer i=0;i <cont;i++ ){
+            atualizaEstoque(i);
+        }
+
+    }
+
+    private void cancelaItem(int position){
+        atualizaEstoque(position);
+        AppSetup.carrinho.remove(position);
+        atualizarview();
+    }
+
+
     private void salvapedido (){
         Pedido p = new Pedido(AppSetup.carrinho);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -149,11 +166,13 @@ public class CarrinhoActivity extends AppCompatActivity {
     }
 
     private void atualizarview(){
-//        lvCarrinho.setAdapter(new CarrinhoActivity(CarrinhoActivity.this, AppSetup.carrinho));
-//        totalPedido= od;
-//        for(ItemPedido item : AppSetup.carrinho){
-//            totalPedido += item.getTotalItem();
-//        }
-//        tvTotalPedido.setText(NumberFormat.getCurrencyInstance().format(totalPedido));
+
+        Double valortotal;
+       // lvCarrinho.setAdapter(new Carrinh(CarrinhoActivity.this, AppSetup.carrinho));
+        valortotal= 0d;
+        for(ItemPedido item : AppSetup.carrinho){
+           valortotal += item.getTotalItem();
+        }
+        valor.setText(NumberFormat.getCurrencyInstance().format(valortotal));
     }
 }

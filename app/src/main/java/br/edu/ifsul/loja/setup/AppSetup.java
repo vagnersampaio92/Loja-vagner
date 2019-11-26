@@ -23,5 +23,5 @@ public class AppSetup {
     public static Map<String, Bitmap> cacheProdutos =  new HashMap<>();
     public static Map<String, Bitmap> cacheClientes =  new HashMap<>();
     public static FirebaseAuth mAuth;
-    //public static ArrayList<ItemPedido> carrinho = new ArrayList<>();
+    public static ArrayList<ItemPedido> carrinholist = new ArrayList<>();
 }

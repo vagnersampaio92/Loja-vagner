@@ -28,6 +28,9 @@
             android:name=".activity.ProdutoDetalheActivity"
             android:label="Detalhe do Produto" />
         <activity
+            android:name=".activity.ProdutoAdminActivity"
+            android:label="adiciona produto" />
+        <activity
             android:name=".activity.ProdutosActivity"
             android:label="Produtos"
             android:theme="@style/AppTheme.NoActionBar" />

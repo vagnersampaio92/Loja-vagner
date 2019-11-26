@@ -88,10 +88,11 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
                             myRef.setValue(produto.getQuantidade() - Integer.parseInt(etQuantidade.getText().toString()));
                             //vai para o carrinho
                             Intent intent = new Intent(ProdutoDetalheActivity.this, CarrinhoActivity.class);
-                            intent.putExtra("value",item.getTotalItem().toString());
+                           intent.putExtra("value",item.getTotalItem().toString());
                             intent.putExtra("name_cli",AppSetup.cliente.getNome());
-                            intent.putExtra("nomeproduto",produto.getNome());
-                            startActivity(intent);
+                           intent.putExtra("nomeproduto",produto.getNome());
+
+                           startActivity(intent);
                             finish();
                         }
                     }else{
