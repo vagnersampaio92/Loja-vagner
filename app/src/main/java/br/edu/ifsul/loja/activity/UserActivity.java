@@ -1,10 +1,14 @@
 package br.edu.ifsul.loja.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,6 +22,7 @@ import java.util.List;
 import br.edu.ifsul.loja.R;
 import br.edu.ifsul.loja.adapter.ClientesAdapter;
 import br.edu.ifsul.loja.adapter.UserAdapter;
+import br.edu.ifsul.loja.barcode.BarcodeCaptureActivity;
 import br.edu.ifsul.loja.model.Cliente;
 import br.edu.ifsul.loja.model.User;
 
@@ -30,6 +35,8 @@ public class UserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        //ativa o botão home na actionbar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //mapeia o componente da view
         lvUsers = findViewById(R.id.lv_users);
@@ -73,7 +80,23 @@ public class UserActivity extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                break;
+
+
+        }
+
+        return true;
+    }
 
 
 }

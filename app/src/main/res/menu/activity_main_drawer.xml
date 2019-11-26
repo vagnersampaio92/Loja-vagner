@@ -29,6 +29,10 @@
                     android:icon="@drawable/ic_contacts_48"
                     android:title="Cliente (Admin)" />
                 <item
+                    android:id="@+id/nav_pedidos"
+                    android:icon="@drawable/cart_38_48"
+                    android:title="lista pedidos" />
+                <item
                     android:id="@+id/nav_add_user"
                     android:icon="@drawable/ic_add_user_48"
                     android:title="Usuário (Admin)" />
