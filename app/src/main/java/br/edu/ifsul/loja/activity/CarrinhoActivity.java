@@ -129,7 +129,9 @@ public class CarrinhoActivity extends AppCompatActivity {
 
 
     //editar um item
-    //limpar setup
+
+
+
     private  void cancelacompra(){
         Integer cont;
 
