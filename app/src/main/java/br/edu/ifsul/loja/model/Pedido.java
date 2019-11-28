@@ -5,7 +5,7 @@ public class Pedido {
     private String key;
     private String formaDePagamento;
     private String estado;
-    private Long dataCriacao;
+    private String dataCriacao;
     private Long dataModificacao;
     private Double totalPedido;
     private Boolean situacao;
@@ -40,11 +40,11 @@ public class Pedido {
         this.estado = estado;
     }
 
-    public Long getDataCriacao() {
+    public String getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(Long dataCriacao) {
+    public void setDataCriacao(String dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 

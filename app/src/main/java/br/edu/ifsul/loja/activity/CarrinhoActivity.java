@@ -20,6 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import br.edu.ifsul.loja.R;
@@ -161,8 +163,16 @@ public class CarrinhoActivity extends AppCompatActivity {
 
         p.setCliente(AppSetup.cliente);
         p.setSituacao(true);
-
+        Calendar calendar = Calendar.getInstance();
+        long day = calendar.get(Calendar.DAY_OF_MONTH);
+        long month = calendar.get(Calendar.MONTH);
+        long year = calendar.get(Calendar.YEAR);
+        String teste = day + "/" + month +"/" + year;
+        p.setDataCriacao(teste);
         myRef.child(p.getKey()).setValue(p); //salva o produto no database
+        
+
+
     }
     private void atualizaEstoque(int position){
         final  DatabaseReference myRef =database.getReference("vendas/produtos");
