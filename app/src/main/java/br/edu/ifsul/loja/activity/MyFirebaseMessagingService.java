@@ -1,7 +1,11 @@
 package br.edu.ifsul.loja.activity;
 
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
+//import android.app.NotificationManager;
+import android.content.Context;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -10,10 +14,11 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import br.edu.ifsul.loja.R;
 
-import static android.support.constraint.Constraints.TAG;
-
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
+    private static final String TAG = "myFirebaseService";
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void onMessageReceived(RemoteMessage remoteMessage) {
         // ...
 
@@ -38,14 +43,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"1")
+            Notification.Builder builder = new Notification.Builder(this,"1")
 
-
+                    .setSmallIcon(R.drawable.images)
                     .setContentText(remoteMessage.getNotification().getBody())
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+                    .setPriority(Notification.PRIORITY_DEFAULT);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                    /// NotificationManagerCompat.from(this);
 
 // notificationId is a unique int for each notification that you must define
+            Log.d(TAG, "buider " + builder);
             notificationManager.notify(1, builder.build());
         }
 

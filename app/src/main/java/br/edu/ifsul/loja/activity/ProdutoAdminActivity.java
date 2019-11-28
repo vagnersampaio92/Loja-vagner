@@ -75,6 +75,9 @@ public class ProdutoAdminActivity extends AppCompatActivity {
 
         //inicializa o objeto de modelo
         produto = new Produto();
+        
+        //ativa o botão home na actionbar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //mapeia os componentes da UI
         etCodigoDeBarras = findViewById(R.id.etCodigoProduto);
@@ -141,6 +144,22 @@ public class ProdutoAdminActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                break;
+
+
+        }
+
+        return true;
     }
 
     private void uploadFotoDoProduto() {
