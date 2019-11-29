@@ -22,7 +22,9 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import br.edu.ifsul.loja.R;
 import br.edu.ifsul.loja.adapter.CarrinhoAdapter;
@@ -170,7 +172,20 @@ public class CarrinhoActivity extends AppCompatActivity {
         String teste = day + "/" + month +"/" + year;
         p.setDataCriacao(teste);
         myRef.child(p.getKey()).setValue(p); //salva o produto no database
-        
+//
+//        DatabaseReference myRef2 = database.getReference().child("vendas").child("cliente").child(AppSetup.cliente.getKey());
+//        AppSetup.cliente.setKey(p.getKey());
+        //myRef2.a(AppSetup.cliente);
+
+//        String key = AppSetup.cliente.getKey();
+//        Post post = new Post(AppSetup.cliente);
+//        Map<String, Object> postValues = post.toMap();
+//
+//        Map<String, Object> childUpdates = new HashMap<>();
+//        childUpdates.put("/posts/" + key, postValues);
+//        childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
+//
+//        myRef2.updateChildren(AppSetup.cliente);
 
 
     }

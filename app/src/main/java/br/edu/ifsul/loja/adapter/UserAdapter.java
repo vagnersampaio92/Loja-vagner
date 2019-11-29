@@ -54,7 +54,7 @@ public class UserAdapter extends ArrayAdapter<User> {
 
 
 
-    private class ViewHolder {
+    class ViewHolder {
         final TextView tvNome;
         final TextView tvSobrenome;
        // final TextView tvFuncao;
