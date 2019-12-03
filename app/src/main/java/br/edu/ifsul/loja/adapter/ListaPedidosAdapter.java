@@ -43,7 +43,7 @@ public class ListaPedidosAdapter extends ArrayAdapter<Pedido> {
         }
 
         Pedido pedido = getItem(position);
-        Log.d(TAG, "pedido"+ pedido);
+        Log.d(TAG, "pedido"+ pedido.getKey());
         holder.tvValor.setText(NumberFormat.getCurrencyInstance().format(pedido.getTotalPedido()));
         holder.tvData.setText(pedido.getDataCriacao());
         holder.tvkey.setText(pedido.getKey());

@@ -52,7 +52,7 @@ public class ListaPedidosActivity extends AppCompatActivity {
                 Cliente cliente = dataSnapshot.getValue(Cliente.class);
 
                 final List<Pedido> pedidos = new ArrayList<>();
-                for(String keyp : cliente.getPedidos()){
+                for(final String keyp : cliente.getPedidos()){
                     Log.d(TAG, "keyp=" + keyp);
                     DatabaseReference myRef = database.getReference("vendas/pedidos/"+ keyp);
                     myRef.addValueEventListener(new ValueEventListener() {
@@ -60,6 +60,7 @@ public class ListaPedidosActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             Log.d(TAG, "dataSnapshot2=" + dataSnapshot);
                             Pedido pedido = dataSnapshot.getValue(Pedido.class);
+                            pedido.setKey(keyp);
                             pedidos.add(pedido);
                             lv_pedidos.setAdapter(new ListaPedidosAdapter(ListaPedidosActivity.this, pedidos));
                         }
