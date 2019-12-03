@@ -255,8 +255,8 @@ public class ProdutosActivity extends AppCompatActivity implements NavigationVie
                     break;
                 case R.id.nav_pedidos:
 
-                    Toast.makeText(this, "Clicou no add user", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(ProdutosActivity.this, ClientesActivity.class));
+                    Toast.makeText(this, "Clicou no lista pedidos", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(ProdutosActivity.this, ListaPedidosActivity.class));
                     break;
                 case R.id.nav_cliente_administracao:
 

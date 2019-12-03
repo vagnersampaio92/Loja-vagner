@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ClientesActivity"
-    android:id="@+id/container_activity_clientes" >
+    tools:context=".activity.ListaPedidosActivity"
+    android:id="@+id/container_Lista_Pedidos_Activity" >
 
     <ListView
         android:id="@+id/lv_pedidos"

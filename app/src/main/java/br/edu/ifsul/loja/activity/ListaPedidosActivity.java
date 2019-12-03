@@ -17,8 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ifsul.loja.R;
+import br.edu.ifsul.loja.adapter.ListaPedidosAdapter;
 import br.edu.ifsul.loja.adapter.UserAdapter;
+import br.edu.ifsul.loja.model.Cliente;
+import br.edu.ifsul.loja.model.Pedido;
 import br.edu.ifsul.loja.model.User;
+import br.edu.ifsul.loja.setup.AppSetup;
 
 public class ListaPedidosActivity extends AppCompatActivity {
 
@@ -28,48 +32,55 @@ public class ListaPedidosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
+        setContentView(R.layout.activity_listpedidos);
         //ativa o botão home na actionbar
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//
-//        //mapeia o componente da view
-//        lvUsers = findViewById(R.id.lv_users);
-//
-//        //buscar os dados no RealTimeDataBase
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference("vendas/users");
-//
-//        myRef.orderByChild("nome").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                Log.d(TAG, "dataSnapshot=" + dataSnapshot);
-//                List<User> listUser = new ArrayList<>();
-//
-//                for(DataSnapshot ds : dataSnapshot.getChildren()){
-//                    Log.d(TAG, "dataSnapshot=" + ds);
-//                    User user = ds.getValue(User.class);
-//                    //====                  //user.setKey(ds.getKey());
-//                    //user.setIndex(listUser.size());
-//                    listUser.add(user);
-//
-//                }
-//
-//                //faz o bindView
-//
-//                //lvProdutos.setAdapter(new ProdutosAdapter(ProdutosActivity.this, listProdutos));
-//
-//                lvUsers.setAdapter(new UserAdapter(UserActivity.this, listUser));
-//
-//
-//
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //mapeia o componente da view
+        lv_pedidos = findViewById(R.id.lv_pedidos);
+
+        //buscar os dados no RealTimeDataBase
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("vendas/cliente/"+ AppSetup.cliente.getKey());
+        Log.d(TAG, "Myref=" + myRef);
+
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d(TAG, "dataSnapshot=" + dataSnapshot);
+                Cliente cliente = dataSnapshot.getValue(Cliente.class);
+
+                final List<Pedido> pedidos = new ArrayList<>();
+                for(String keyp : cliente.getPedidos()){
+                    Log.d(TAG, "keyp=" + keyp);
+                    DatabaseReference myRef = database.getReference("vendas/pedidos/"+ keyp);
+                    myRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Log.d(TAG, "dataSnapshot2=" + dataSnapshot);
+                            Pedido pedido = dataSnapshot.getValue(Pedido.class);
+                            pedidos.add(pedido);
+                            lv_pedidos.setAdapter(new ListaPedidosAdapter(ListaPedidosActivity.this, pedidos));
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+                //faz o bindView
+
+                //lvProdutos.setAdapter(new ProdutosAdapter(ProdutosActivity.this, listProdutos));
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
 

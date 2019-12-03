@@ -31,6 +31,9 @@
             android:name=".activity.ProdutoAdminActivity"
             android:label="adiciona produto" />
         <activity
+            android:name=".activity.ListaPedidosActivity"
+            android:label="lista pedidos" />
+        <activity
             android:name=".activity.ProdutosActivity"
             android:label="Produtos"
             android:theme="@style/AppTheme.NoActionBar" />

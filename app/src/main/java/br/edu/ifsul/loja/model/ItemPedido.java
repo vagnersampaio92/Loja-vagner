@@ -12,6 +12,9 @@ public class ItemPedido implements Serializable {
         this.produto = produto;
     }
 
+    public ItemPedido() {
+    }
+
     public Integer getQuantidade() {
         return quantidade;
     }

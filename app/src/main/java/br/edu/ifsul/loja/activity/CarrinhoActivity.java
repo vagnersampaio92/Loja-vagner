@@ -164,6 +164,7 @@ public class CarrinhoActivity extends AppCompatActivity {
         p.setKey(myRef.push().getKey()); //cria o nó e devolve a key
 
         p.setCliente(AppSetup.cliente);
+        p.getCliente().getPedidos().add(p.getKey());
         p.setSituacao(true);
         Calendar calendar = Calendar.getInstance();
         long day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -171,22 +172,14 @@ public class CarrinhoActivity extends AppCompatActivity {
         long year = calendar.get(Calendar.YEAR);
         String teste = day + "/" + month +"/" + year;
         p.setDataCriacao(teste);
+        p.setTotalPedido(valortotal);
         myRef.child(p.getKey()).setValue(p); //salva o produto no database
-//
-//        DatabaseReference myRef2 = database.getReference().child("vendas").child("cliente").child(AppSetup.cliente.getKey());
-//        AppSetup.cliente.setKey(p.getKey());
-        //myRef2.a(AppSetup.cliente);
 
-//        String key = AppSetup.cliente.getKey();
-//        Post post = new Post(AppSetup.cliente);
-//        Map<String, Object> postValues = post.toMap();
-//
-//        Map<String, Object> childUpdates = new HashMap<>();
-//        childUpdates.put("/posts/" + key, postValues);
-//        childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
-//
-//        myRef2.updateChildren(AppSetup.cliente);
+        //salva o pedido no cliente
 
+        DatabaseReference myRef2 = database.getReference("vendas/cliente/"+p.getCliente().getKey());
+
+        myRef2.setValue(p.getCliente());
 
     }
     private void atualizaEstoque(int position){

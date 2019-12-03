@@ -1,4 +1,6 @@
 package br.edu.ifsul.loja.model;
+import com.google.firebase.database.Exclude;
+
 import java.util.List;
 
 public class Pedido {
@@ -12,14 +14,17 @@ public class Pedido {
     private List<ItemPedido> itens; //associação entre as classes Pedido-ItemPedido
     private Cliente cliente; //associação entre as classes Pedido-Cliente
 
+    public Pedido() {
+    }
+
     public Pedido(List<ItemPedido> itens){
         this.itens = itens;
     }
-
+    @Exclude
     public String getKey() {
         return key;
     }
-
+    @Exclude
     public void setKey(String key) {
         this.key = key;
     }
